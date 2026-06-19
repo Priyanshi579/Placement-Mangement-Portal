@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply History</title>
+</head>
+<body>
+    <div>
+        <h1 style = "text-align: center;">Lists of Applied Drive</h1>
+        <div class = "table" style = "text-align: center;">
+            <table border = "10px" bordlinecolor="white" style="margin: auto; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td style="padding: 10px 40px;">Studnet ID</td>
+                        <td style="padding: 10px 40px;">Company Name</td>
+                        <td style="padding: 10px 40px;">Drive Name</td>
+                        <td style="padding: 10px 40px;">Date</td>
+                        <td style="padding: 10px 40px;">Status</td>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for form in forms %}
+                    <tr>
+                        <td style="padding: 15px 40px;">{{form.student_id}} </td>
+                        <td style="padding: 15px 40px;">{{form.company_name}} </td>
+                        <td style="padding: 15px 40px;">{{form.drive_name}} </td>
+                        <td style="padding: 15px 40px;">{{form.date}} </td>
+                        <td style="padding: 15px 40px;">{{form.status}} </td>
+
+                    </tr>
+                    {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

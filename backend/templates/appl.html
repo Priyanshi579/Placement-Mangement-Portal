@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application deadline</title>
+</head>
+<body>
+    <div>
+        <h1 style = "text-align: center;">List of application soon going to close</h1>
+        <div class = "table" style = "text-align: center;">
+            <table border = "10px" bordlinecolor="white" style="margin: auto; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td style="padding: 10px 40px;"> Company Name</td>
+                        <td style="padding: 10px 40px;">Drive Name</td>
+                        <td style="padding: 10px 40px;">Deadline</td>
+                        
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                    <tr>
+                        <td style="padding: 15px 40px;">{{application.company_name}} </td>
+                        <td style="padding: 15px 40px;">{{application.drive_name}} </td>
+                        <td style="padding: 15px 40px;">{{application.deadline}} </td>                        
+                        
+
+                    </tr>
+                    {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

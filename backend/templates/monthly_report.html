@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Report</title>
+</head>
+<body>
+    <div>
+        <h1 style = "text-align: center;">Monthly Report of Company</h1>
+        <div class = "table" style = "text-align: center;">
+            <table border = "10px" bordlinecolor="white" style="margin: auto; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <td style="padding: 10px 40px;"> Company Name</td>
+                        <td style="padding: 10px 40px;">No of drive created</td>
+                        <td style="padding: 10px 40px;">No of Student Apllied</td>
+                        <td style="padding: 10px 40px;">No of Student Selected</td>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in companys %}
+                    <tr>
+                        <td style="padding: 15px 40px;">{{company.company_name}} </td>
+                        <td style="padding: 15px 40px;">{{company.count_drive}} </td>
+                        <td style="padding: 15px 40px;">{{company.count_applications}} </td>
+                        <td style="padding: 15px 40px;">{{company.selected}} </td>
+
+                    </tr>
+                    {% endfor %}
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
