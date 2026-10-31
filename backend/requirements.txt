@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+Flask-JWT-Extended
+Flask-Cors
+Flask-Caching
+redis
+celery
+gunicorn
+psycopg2-binary
+Werkzeug
