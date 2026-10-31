@@ -950,10 +950,7 @@ from models import (
     Student,
     Company,
     PlacementDrive,
-    Application,
-    Interview,
-    Notification,
-    Export
+    Application
 )
 
 
