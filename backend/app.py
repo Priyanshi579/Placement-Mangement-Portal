@@ -1,26 +1,77 @@
-from flask import Flask ,jsonify, request
+# from flask import Flask ,jsonify, request
+# from flask_cors import CORS
+# from models import db,User,Student,Company,PlacementDrive,Application,Interview,Notification,Export
+# from werkzeug.security import generate_password_hash,check_password_hash
+# import json
+# from flask_jwt_extended import create_access_token,get_jwt_identity,jwt_required,JWTManager,get_jwt
+# from datetime import datetime
+# from flask_caching import Cache
+
+# app = Flask(__name__)
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///placement.db'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['JWT_SECRET_KEY'] = 'secret_key'
+# app.config['CACHE_TYPE'] = 'RedisCache'
+# app.config['CACHE_REDIS_URL'] = 'redis://localhost:6379/0'
+
+# CORS(app)
+# db.init_app(app)
+
+
+# jwt = JWTManager(app)
+
+# cache = Cache(app)
+
+import os
+from flask import Flask
 from flask_cors import CORS
-from models import db,User,Student,Company,PlacementDrive,Application,Interview,Notification,Export
-from werkzeug.security import generate_password_hash,check_password_hash
-import json
-from flask_jwt_extended import create_access_token,get_jwt_identity,jwt_required,JWTManager,get_jwt
-from datetime import datetime
+from flask_jwt_extended import JWTManager
 from flask_caching import Cache
+from models import db
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///placement.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY'] = 'secret_key'
-app.config['CACHE_TYPE'] = 'RedisCache'
-app.config['CACHE_REDIS_URL'] = 'redis://localhost:6379/0'
+# Database configuration
+database_url = os.getenv("DATABASE_URL")
 
-CORS(app)
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace(
+        "postgres://", "postgresql://", 1
+    )
+
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    database_url or "sqlite:///placement.db"
+)
+
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# JWT configuration
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
+
+if not app.config["JWT_SECRET_KEY"]:
+    raise RuntimeError("JWT_SECRET_KEY environment variable is required")
+
+# Cache configuration
+redis_url = os.getenv("REDIS_URL")
+
+if redis_url:
+    app.config["CACHE_TYPE"] = "RedisCache"
+    app.config["CACHE_REDIS_URL"] = redis_url
+else:
+    app.config["CACHE_TYPE"] = "SimpleCache"
+
+# CORS configuration
+CORS(
+    app,
+    origins=[
+        "https://priyanshi579.github.io"
+    ]
+)
+
 db.init_app(app)
 
-
 jwt = JWTManager(app)
-
 cache = Cache(app)
 
 @app.route('/api/register', methods = ['POST'])
